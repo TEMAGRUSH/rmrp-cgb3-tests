@@ -107,4 +107,57 @@
       window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
   });
+
+  /* ---------- заказ сайта: копирование ника и плавающая кнопка ---------- */
+  const toastEl = $('#toast');
+  let toastTimer;
+
+  function showToast(text) {
+    if (!toastEl) return;
+    toastEl.textContent = text;
+    toastEl.classList.add('is-on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-on'), 2600);
+  }
+
+  $$('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const value = btn.dataset.copy;
+      try {
+        await navigator.clipboard.writeText(value);
+      } catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = value;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) { /* noop */ }
+        ta.remove();
+      }
+      showToast('Ник скопирован: ' + value);
+    });
+  });
+
+  const fab = $('#promoFab');
+  const orderSection = $('#order');
+  if (fab) {
+    const syncFab = () => {
+      const scrolled = window.scrollY > 420;
+      const orderVisible = orderSection
+        ? orderSection.getBoundingClientRect().top < window.innerHeight * 0.9
+        : false;
+      fab.classList.toggle('is-on', scrolled && !orderVisible);
+    };
+    syncFab();
+    window.addEventListener('scroll', syncFab, { passive: true });
+    window.addEventListener('resize', syncFab);
+
+    fab.addEventListener('click', () => {
+      const target = orderSection || $('#variants');
+      if (!target) return;
+      const top = target.getBoundingClientRect().top + window.scrollY - 92;
+      window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
 })();
