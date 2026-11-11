@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Тесты ЦГБ №3 — аттестация медперсонала · RMRP</title>
-  <meta name="description" content="Онлайн-аттестация ЦГБ №3 на RMRP: 6 вариантов по 3 вопроса о формах помощи, условиях лечения, видах помощи и экспертизах. Экзамен или тренировка с разбором ошибок.">
+  <meta name="description" content="Онлайн-аттестация ЦГБ №3 на RMRP: два варианта по 9 вопросов о формах помощи, условиях лечения, видах помощи и экспертизах. Экзамен или тренировка с разбором ошибок.">
   <meta name="theme-color" content="#05080c">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Тесты ЦГБ №3 · RMRP">
-  <meta property="og:description" content="18 вопросов, 6 вариантов, разбор каждой ошибки. Пройди аттестацию и получи допуск к смене.">
+  <meta property="og:description" content="Два варианта по 9 вопросов, разбор каждой ошибки. Пройди аттестацию и получи допуск к смене.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23070d13'/%3E%3Cpath d='M20.5 11h7v9.5H37v7h-9.5V37h-7v-9.5H11v-7h9.5V11Z' fill='%233fe8ad'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,28 +82,28 @@
 
     <div class="container quiz-hero__inner">
       <div>
-        <span class="eyebrow">Внутренняя аттестация · 18 вопросов</span>
+        <span class="eyebrow">Внутренняя аттестация · 2 варианта по 9 вопросов</span>
         <h1>Тесты <span class="grad">ЦГБ №3</span></h1>
         <p class="hero-sub">
-          Шесть вариантов по три вопроса: формы помощи, условия лечения, виды помощи, экспертизы
+          Два варианта по девять вопросов: формы помощи, условия лечения, виды помощи, экспертизы
           и закрепление районов. Отвечай, получай разбор ошибок и допуск к смене.
         </p>
 
         <div class="quiz-hero__actions">
-          <a class="btn btn--primary" href="#variants">
-            Начать тест
+          <button class="btn btn--primary" type="button" data-start="v1">
+            Вариант 1
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <button class="btn btn--ghost" type="button" data-start="random">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
-            Случайный микс
+          </button>
+          <button class="btn btn--ghost" type="button" data-start="v2">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h9M4 12h9M4 18h9"/><path d="M17 9l3 3-3 3"/></svg>
+            Вариант 2
           </button>
         </div>
 
         <div class="quiz-hero__meta">
           <span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            3 вопроса — около минуты
+            9 вопросов — около 3 минут
           </span>
           <span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
@@ -121,7 +121,7 @@
           <div class="permit__top"><span>Допуск к смене</span><span>ЦГБ №3</span></div>
           <div class="permit__title">Аттестация медперсонала</div>
           <div class="permit__sub">RMRP · Исторический район</div>
-          <div class="permit__score">3/3<small>отличный результат</small></div>
+          <div class="permit__score">9/9<small>отличный результат</small></div>
           <div class="permit__bars">
             <div class="permit__bar"><i style="--w:100%"></i></div>
             <div class="permit__bar"><i style="--w:100%; animation-delay:.5s"></i></div>
@@ -140,7 +140,7 @@
       <div class="app-head" id="variants" data-reveal>
         <div>
           <span class="eyebrow">Выбери вариант</span>
-          <h2>6 вариантов аттестации</h2>
+          <h2>Два варианта по 9 вопросов</h2>
         </div>
         <p>Экзамен — проверка в конце. Тренировка — правильный ответ и разбор сразу после выбора.</p>
       </div>
@@ -218,7 +218,7 @@
                       stroke-dasharray="552.9" stroke-dashoffset="552.9"/>
             </svg>
             <div class="result__score">
-              <b id="scoreValue">0/3</b>
+              <b id="scoreValue">0/9</b>
               <span>результат</span>
             </div>
           </div>
@@ -266,7 +266,7 @@
         <div class="how__item" data-reveal>
           <span class="how__num">01</span>
           <h3>Выбери вариант</h3>
-          <p>Шесть тем или полный набор из 18 вопросов. Случайный микс каждый раз собирает новый список.</p>
+          <p>Вариант 1 — помощь и условия, вариант 2 — экспертизы и районы. По девять вопросов в каждом.</p>
         </div>
         <div class="how__item" data-reveal style="--d:80ms">
           <span class="how__num">02</span>
@@ -276,7 +276,7 @@
         <div class="how__item" data-reveal style="--d:160ms">
           <span class="how__num">03</span>
           <h3>Получи допуск</h3>
-          <p>3/3 — допуск к смене, 2/3 — зачёт с замечанием, меньше — пересдача с разбором ошибок.</p>
+          <p>8–9 из 9 — допуск к смене, 6–7 — зачёт с замечанием, меньше — пересдача с разбором ошибок.</p>
         </div>
       </div>
     </div>

@@ -89,21 +89,7 @@
       </button>`;
   }
 
-  const actionCards = `
-    <button class="variant-card variant-card--action" type="button" data-open="all">
-      <span class="variant-card__num">ПОЛНЫЙ НАБОР</span>
-      <h3>Все 18 вопросов</h3>
-      <p>Все шесть вариантов подряд — проверка на прочность перед сменой.</p>
-      <span class="variant-card__foot"><span class="variant-card__score is-empty">полный прогон</span>${arrowSvg}</span>
-    </button>
-    <button class="variant-card variant-card--action" type="button" data-open="random">
-      <span class="variant-card__num">МИКС</span>
-      <h3>Случайный микс</h3>
-      <p>Шесть случайных вопросов из базы — каждый раз новый набор.</p>
-      <span class="variant-card__foot"><span class="variant-card__score is-empty">6 вопросов</span>${arrowSvg}</span>
-    </button>`;
-
-  grid.innerHTML = TEST_VARIANTS.map(variantCard).join('') + actionCards;
+  grid.innerHTML = TEST_VARIANTS.map(variantCard).join('');
 
   grid.addEventListener('click', (e) => {
     const card = e.target.closest('[data-open]');
@@ -117,26 +103,10 @@
     window.scrollTo({ top: Math.max(0, $('#modes').offsetTop - 100), behavior: reduceMotion ? 'auto' : 'smooth' });
   }
 
-  function shuffle(arr) {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-
   function buildQuestions(id) {
-    if (id === 'all') {
-      return TEST_VARIANTS.flatMap((v) => v.questions.map((q) => ({ ...q, group: 'Вариант ' + v.id + ' · ' + v.title })));
-    }
-    if (id === 'random') {
-      const pool = TEST_VARIANTS.flatMap((v) => v.questions.map((q) => ({ ...q, group: 'Микс' })));
-      return shuffle(pool).slice(0, 6);
-    }
     const num = parseInt(id.replace('v', ''), 10);
     const v = TEST_VARIANTS.find((x) => x.id === num);
-    return v ? v.questions.map((q) => ({ ...q, group: 'Вариант ' + v.id + ' · ' + v.title })) : [];
+    return v ? v.questions.map((q) => ({ ...q, group: q.topic || 'Вариант ' + v.id })) : [];
   }
 
   function startQuiz(id) {
@@ -144,11 +114,7 @@
     if (!questions.length) return;
 
     state.variantId = id;
-    state.variantName = id === 'all'
-      ? 'Все 18 вопросов'
-      : id === 'random'
-        ? 'Случайный микс'
-        : 'Вариант ' + id.replace('v', '');
+    state.variantName = 'Вариант ' + id.replace('v', '');
     state.questions = questions;
     state.index = 0;
     state.answers = new Array(questions.length).fill(null);
@@ -172,7 +138,7 @@
 
     const meterFill = $('#meterFill');
     const meterText = $('#meterText');
-    if (meterFill) meterFill.style.width = ((state.index) / total) * 100 + '%';
+    if (meterFill) meterFill.style.width = ((state.index + 1) / total) * 100 + '%';
     if (meterText) meterText.textContent = 'Вопрос ' + (state.index + 1) + ' из ' + total;
 
     const box = $('#qOptions');
@@ -281,7 +247,7 @@
 
   /* ---------------- результат ---------------- */
   function gradeFor(ratio) {
-    if (ratio >= 0.9) {
+    if (ratio >= 0.85) {
       return {
         cls: '',
         grade: 'Допуск получен',
@@ -294,7 +260,7 @@
         cls: 'is-warn',
         grade: 'Зачёт с замечанием',
         title: 'Почти идеально',
-        text: 'База есть, но одна тема просела. Пробегись по разбору ошибок — и на пересдаче будет 3 из 3.'
+        text: 'База есть, но несколько тем просели. Пробегись по разбору ошибок — и на пересдаче будет 9 из 9.'
       };
     }
     return {
@@ -347,7 +313,7 @@
     renderHistory();
     renderPickerScores();
 
-    if (ratio >= 0.9) confettiBurst();
+    if (ratio >= 0.85) confettiBurst();
   }
 
   function renderReview() {
@@ -514,5 +480,5 @@
   renderPickerScores();
 
   const hash = location.hash.replace('#', '');
-  if (/^v[1-6]$/.test(hash) || hash === 'all' || hash === 'random') startQuiz(hash);
+  if (/^v[12]$/.test(hash)) startQuiz(hash);
 })();
